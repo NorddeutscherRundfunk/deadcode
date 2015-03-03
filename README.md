@@ -22,3 +22,9 @@ Unused tags:
 HighCommentRatioPages (> 30%):
 /home/foo/workspace/project/src/main/webapp/test.jsp: 37
 ```
+
+## Graphviz output
+If the optional "graphvizFile" is specified a .dot-file will be created. Then this file can be used to generate a svg file (or similar) to show the usage in a very userfriendly way:
+```
+dot -Tsvg -o/tmp/deadcode.svg /tmp/deadcode.dot
+```
