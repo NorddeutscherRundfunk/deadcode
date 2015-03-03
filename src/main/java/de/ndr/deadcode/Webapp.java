@@ -30,7 +30,7 @@ public class Webapp {
 	}
 
 	public Set<Tag> getTags() {
-		return tags ;
+		return tags;
 	}
 
 }
