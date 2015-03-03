@@ -20,7 +20,7 @@ Unused tags:
 1/5 Tags unused.
 
 HighCommentRatioPages (> 30%):
-/home/foo/workspace/project/src/main/webapp/test.jsp: 37
+/test.jsp: 37
 ```
 
 ## Graphviz output
