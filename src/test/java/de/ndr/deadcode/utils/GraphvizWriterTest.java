@@ -1,4 +1,4 @@
-package de.ndr.deadcode;
+package de.ndr.deadcode.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.ndr.deadcode.WebappProcessor;
 import de.ndr.deadcode.result.WebappResult;
 import de.ndr.deadcode.utils.GraphvizWriter;
 
