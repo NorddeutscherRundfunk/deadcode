@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 
 import de.ndr.deadcode.result.WebappResult;
 import de.ndr.deadcode.taglib.Tag;
@@ -52,7 +53,9 @@ public class Deadcode {
 		
 		System.out.println("\nHighCommentRatioPages (> " + COMMENT_RATIO + "%):");
 		for (JspPage page : result.getHighCommentRatioPages()) {
-			System.out.format("%s: %d\n", page, page.getCommentedCodeInfo().commentRatio);
+			System.out.format("%s: %d\n", 
+								StringUtils.substringAfter(page.getFile().getAbsolutePath(), webappRoot.getAbsolutePath()),
+								page.getCommentedCodeInfo().commentRatio);
 		}
 	}
 }

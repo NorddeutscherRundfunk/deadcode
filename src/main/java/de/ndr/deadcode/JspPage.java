@@ -148,4 +148,8 @@ public class JspPage {
 	public Set<Import> getImports() {
 		return imports;
 	}
+
+	public File getFile() {
+		return file;
+	}
 }
