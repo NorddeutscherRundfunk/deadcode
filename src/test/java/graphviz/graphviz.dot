@@ -1,0 +1,24 @@
+digraph {
+	rankdir=LR;
+	
+	subgraph cluster_taglibs {
+		label = "taglibs"
+		
+		"http://www.example.com/example/jsp"
+		"http://java.sun.com/jsp/jstl/core"
+		"/WEB-INF/tags/gsa"
+		"http://java.sun.com/jsp/jstl/functions"
+		"http://jakarta.apache.org/taglibs/regexp-1.0"
+		"/WEB-INF/tags/test"
+		"/WEB-INF/tags/foo"
+	}
+	
+	subgraph cluster_webapp {
+		label = "/"
+		
+		"/test2.jsp" -> "http://www.example.com/example/jsp" [color=red, label=<<FONT COLOR="red">ex</FONT>>]
+		"/test.jsp" -> "/WEB-INF/tags/gsa" [color=red, label=<<FONT COLOR="red">gsa-ext</FONT>>]
+		"/test.jsp" -> "http://java.sun.com/jsp/jstl/functions" [color=red, label=<<FONT COLOR="red">fn</FONT>>]
+		"/test.jsp" -> "http://jakarta.apache.org/taglibs/regexp-1.0" [color=red, label=<<FONT COLOR="red">rx</FONT>>]
+	}
+}
