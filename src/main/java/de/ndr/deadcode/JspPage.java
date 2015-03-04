@@ -3,7 +3,6 @@ package de.ndr.deadcode;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -100,17 +99,10 @@ public class JspPage {
 		}
 		
 		// Find unused imports by checking each imported taglib for occurence in fileContent
-		unusedTaglib = new HashSet<Taglib>(importedTaglibs);
 		List<String> lines = FileUtils.readLines(file);
-		for (Iterator<Taglib> iterator = unusedTaglib.iterator(); iterator.hasNext();) {
-			Taglib taglib = (Taglib) iterator.next();
-			for (String line : lines) {
-				if (StringUtils.contains(line, "<" + taglib.getPrefix() + ":")) {
-					iterator.remove();
-					break;
-				}
-			}	
-		}
+		unusedTaglib = new HashSet<Taglib>(importedTaglibs);
+		unusedTaglib.removeIf(t -> lines.stream()
+								.anyMatch(l -> l.contains("<" + t.getPrefix() + ":")));
 	}
 
 	private void findCommentedCode(String fileContent) {
