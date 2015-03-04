@@ -101,9 +101,9 @@ public class JspPage {
 		
 		// Find unused imports by checking each imported taglib for occurence in fileContent
 		unusedTaglib = new HashSet<Taglib>(importedTaglibs);
+		List<String> lines = FileUtils.readLines(file);
 		for (Iterator<Taglib> iterator = unusedTaglib.iterator(); iterator.hasNext();) {
 			Taglib taglib = (Taglib) iterator.next();
-			List<String> lines = FileUtils.readLines(file);
 			for (String line : lines) {
 				if (StringUtils.contains(line, "<" + taglib.getPrefix() + ":")) {
 					iterator.remove();
