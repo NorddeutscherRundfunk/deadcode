@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
-import org.apache.commons.lang.StringUtils;
 
 import de.ndr.deadcode.result.FileResult;
 import de.ndr.deadcode.result.WebappResult;
@@ -18,16 +16,15 @@ import de.ndr.deadcode.taglib.Taglib;
 public class WebappProcessor {
 
 	private int commentRatio;
+	private File webappRoot;
 
-	public WebappProcessor(int commentRatio) {
+	public WebappProcessor(int commentRatio, File webappRoot) {
 		this.commentRatio = commentRatio;
+		this.webappRoot = webappRoot;
 	}
 
-	public WebappResult processWebapp(File webappRoot) {
-		return processDirectory(webappRoot, new WebappResult(webappRoot));
-	}
-	
-	private WebappResult processDirectory(File webappRoot, WebappResult result) {
+	public WebappResult process() {
+		WebappResult result = new WebappResult(webappRoot);
 		Collection<File> files = FileUtils.listFiles(webappRoot, new SuffixFileFilter(new String[] {"jsp", "tag"}), TrueFileFilter.INSTANCE);
 		
 		for (File file : files) {
@@ -35,23 +32,10 @@ public class WebappProcessor {
 				JspPage page = new JspPage(file);
 							
 				Set<Taglib> unusedImports = page.getUnusedTaglibs();
-				FileResult fileResult = new FileResult(file, unusedImports, page.getImports());
+				FileResult fileResult = new FileResult(page, unusedImports, page.getImports());
 				result.addFileResults(fileResult);
 				result.addTaglibImports(page.getImportedTaglibs());
-
-				if (!unusedImports.isEmpty()) {
-					Set<String> prefixes = unusedImports.stream()
-											.map((t) -> t.getPrefix())
-											.collect(Collectors.toSet());
-
-					System.out.format("%d/%d unused imports (%s): %s\n", 
-							unusedImports.size(), 
-							page.getImportedTaglibs().size(),
-							StringUtils.join(prefixes, ", "),
-							StringUtils.substringAfter(file.getAbsolutePath(), webappRoot.getAbsolutePath())
-							);
-				}
-				result.getUsedTags().addAll(page.getUsedTags());
+				result.addUsedTags(page.getUsedTags());
 				
 				if (page.getCommentedCodeInfo().commentRatio > commentRatio) {
 					result.getHighCommentRatioPages().add(page);
@@ -62,5 +46,4 @@ public class WebappProcessor {
 		}
 		return result;
 	}
-
 }
