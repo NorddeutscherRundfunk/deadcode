@@ -35,7 +35,7 @@ public class WebappProcessor {
 				FileResult fileResult = new FileResult(page, unusedImports, page.getImports());
 				result.addFileResults(fileResult);
 				result.addTaglibImports(page.getImportedTaglibs());
-				result.addUsedTags(page.getUsedTags());
+				result.addUsedEntities(page.getUsedEntities());
 				
 				if (page.getCommentedCodeInfo().commentRatio > commentRatio) {
 					result.getHighCommentRatioPages().add(page);

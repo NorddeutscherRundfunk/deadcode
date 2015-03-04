@@ -11,6 +11,11 @@ taglib tagdir = "/WEB-INF/tags/test" prefix=
 prefix="rx"%>
 <%@taglib tagdir="/WEB-INF/tags/gsa" prefix="gsa-ext" %>
 
+
+${fn:trim("abc")}
+<c:if test="${fn:length(var) > 2 && fn:startsWith(var, "abc")}">
+</c:if>
+
 <c:forEach items="${current.box}" var="box" varStatus="status">
 
 		<c:choose>
