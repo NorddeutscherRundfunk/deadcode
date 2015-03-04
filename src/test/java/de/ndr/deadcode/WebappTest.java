@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.ndr.deadcode.taglib.AbstractJSTLEntity;
 import de.ndr.deadcode.taglib.Tag;
 
 public class WebappTest {
@@ -36,10 +37,10 @@ public class WebappTest {
 	@Test
 	public void findUnusedTags() throws Exception {
 		JspPage jspPage = new JspPage(new File(Test.class.getResource("/webapp/test.jsp").getFile()));
-		Set<Tag> usedTags = jspPage.getUsedTags();
+		Set<AbstractJSTLEntity> usedEntities = jspPage.getUsedEntities();
 		Set<Tag> definedTags = webapp.getTags();
 		@SuppressWarnings("unchecked")
-		Collection<Tag> unusedTags = CollectionUtils.subtract(definedTags, usedTags);
+		Collection<Tag> unusedTags = CollectionUtils.subtract(definedTags, usedEntities);
 		
 		Assert.assertThat(unusedTags.size(), is(2));
 		

@@ -3,7 +3,6 @@ package de.ndr.deadcode;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +12,8 @@ import org.apache.commons.lang.StringUtils;
 
 import de.ndr.deadcode.imports.Import;
 import de.ndr.deadcode.result.CommentedCodeInfo;
+import de.ndr.deadcode.taglib.AbstractJSTLEntity;
+import de.ndr.deadcode.taglib.Function;
 import de.ndr.deadcode.taglib.Tag;
 import de.ndr.deadcode.taglib.TagdirTaglibEntry;
 import de.ndr.deadcode.taglib.Taglib;
@@ -21,7 +22,7 @@ import de.ndr.deadcode.taglib.UriTaglibEntry;
 public class JspPage {
 	
 	private File file;
-	private Set<Tag> usedTags = new HashSet<Tag>();
+	private Set<AbstractJSTLEntity> usedEntities = new HashSet<AbstractJSTLEntity>();
 	private Set<Taglib> importedTaglibs = new HashSet<Taglib>();
 	private Set<Taglib> unusedTaglib = new HashSet<Taglib>();
 	private Set<Import> imports = new HashSet<Import>();
@@ -84,25 +85,33 @@ public class JspPage {
 			}
 		}
 		
+		unusedTaglib = new HashSet<Taglib>(importedTaglibs);
 		// Find usedTags in fileContent
 		for (Taglib taglib : importedTaglibs) {
-			Pattern pattern = Pattern.compile("<" + taglib.getPrefix() + ":(?<tagname>[^>/\\s]*)[^/>]*", Pattern.MULTILINE);
+			Pattern pattern = Pattern.compile(
+					"(<" + taglib.getPrefix() + ":(?<tagname>[^>/\\s]*)[^/>]*|" + 
+					"[^<]" + taglib.getPrefix() + ":(?<function>[^(/\\s]+)\\()", 
+					Pattern.MULTILINE);
 			Matcher matcher = pattern.matcher(fileContent);
 			while (matcher.find()) {
+				unusedTaglib.remove(taglib);
 				String tagname = matcher.group("tagname");
-				if (taglib instanceof TagdirTaglibEntry) {
-					usedTags.add(new Tag(((TagdirTaglibEntry) taglib).getTagdir(), tagname));
-				} else if (taglib instanceof UriTaglibEntry) {
-					usedTags.add(new Tag(((UriTaglibEntry) taglib).getUri(), tagname));
+				String function = matcher.group("function");
+				if (tagname != null) {
+					if (taglib instanceof TagdirTaglibEntry) {
+						usedEntities.add(new Tag(((TagdirTaglibEntry) taglib).getTagdir(), tagname));
+					} else if (taglib instanceof UriTaglibEntry) {
+						usedEntities.add(new Tag(((UriTaglibEntry) taglib).getUri(), tagname));
+					}
+				} else if (function != null) {
+					if (taglib instanceof TagdirTaglibEntry) {
+						usedEntities.add(new Function(((TagdirTaglibEntry) taglib).getTagdir(), function));
+					} else if (taglib instanceof UriTaglibEntry) {
+						usedEntities.add(new Function(((UriTaglibEntry) taglib).getUri(), function));
+					}
 				}
 			}
 		}
-		
-		// Find unused imports by checking each imported taglib for occurence in fileContent
-		List<String> lines = FileUtils.readLines(file);
-		unusedTaglib = new HashSet<Taglib>(importedTaglibs);
-		unusedTaglib.removeIf(t -> lines.stream()
-								.anyMatch(l -> l.contains("<" + t.getPrefix() + ":")));
 	}
 
 	private void findCommentedCode(String fileContent) {
@@ -124,8 +133,8 @@ public class JspPage {
 		return importedTaglibs;
 	}
 
-	public Set<Tag> getUsedTags() {
-		return usedTags;
+	public Set<AbstractJSTLEntity> getUsedEntities() {
+		return usedEntities;
 	}
 
 	public CommentedCodeInfo getCommentedCodeInfo() {

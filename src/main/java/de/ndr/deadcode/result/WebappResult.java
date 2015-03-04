@@ -8,6 +8,7 @@ import java.util.Set;
 
 import de.ndr.deadcode.JspPage;
 import de.ndr.deadcode.imports.Import;
+import de.ndr.deadcode.taglib.AbstractJSTLEntity;
 import de.ndr.deadcode.taglib.Tag;
 import de.ndr.deadcode.taglib.Taglib;
 
@@ -15,7 +16,7 @@ public class WebappResult {
 
 	private File webappRoot;
 	private List<FileResult> fileResults;
-	private Set<Tag> usedTags = new LinkedHashSet<Tag>();
+	private Set<AbstractJSTLEntity> usedEntities = new LinkedHashSet<AbstractJSTLEntity>();
 	private Set<Taglib> taglibImports = new LinkedHashSet<Taglib>();
 	private Set<Import> imports = new LinkedHashSet<Import>();
 	private Set<JspPage> highCommentRatioPages = new LinkedHashSet<JspPage>();
@@ -45,8 +46,8 @@ public class WebappResult {
 		this.taglibImports.addAll(taglibImports);
 	}
 
-	public Set<Tag> getUsedTags() {
-		return usedTags;
+	public Set<AbstractJSTLEntity> getUsedEntities() {
+		return usedEntities;
 	}
 	
 	public Set<JspPage> getHighCommentRatioPages() {
@@ -61,7 +62,7 @@ public class WebappResult {
 		this.imports.addAll(imports);
 	}
 
-	public void addUsedTags(Set<Tag> usedTags) {
-		this.usedTags.addAll(usedTags);
+	public void addUsedEntities(Set<AbstractJSTLEntity> usedEntities) {
+		this.usedEntities.addAll(usedEntities);
 	}
 }

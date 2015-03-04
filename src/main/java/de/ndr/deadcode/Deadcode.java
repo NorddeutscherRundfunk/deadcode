@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 
 import de.ndr.deadcode.result.FileResult;
 import de.ndr.deadcode.result.WebappResult;
+import de.ndr.deadcode.taglib.AbstractJSTLEntity;
 import de.ndr.deadcode.taglib.Tag;
 import de.ndr.deadcode.taglib.Taglib;
 import de.ndr.deadcode.utils.GraphvizWriter;
@@ -60,10 +61,10 @@ public class Deadcode {
 		Set<Tag> definedTags = webapp.getTags();
 		
 		@SuppressWarnings("unchecked")
-		Collection<Tag> unusedTags = CollectionUtils.subtract(definedTags, result.getUsedTags());
+		Collection<Tag> unusedTags = CollectionUtils.subtract(definedTags, result.getUsedEntities());
 		
 		System.out.println("\nUnused tags:");
-		for (Tag tag : unusedTags) {
+		for (AbstractJSTLEntity tag : unusedTags) {
 			System.out.println(tag);
 		}
 		System.out.println(unusedTags.size() + "/" + definedTags.size() + " Tags unused.");
