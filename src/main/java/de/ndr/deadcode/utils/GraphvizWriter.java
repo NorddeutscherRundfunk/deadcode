@@ -36,7 +36,7 @@ public class GraphvizWriter {
 		lines.add("\t\tlabel = \"/\"");
 		lines.add("\t\t");
 		for (FileResult fileResult : result.getFileResults()) {
-			String relativePath = StringUtils.substringAfter(fileResult.getFile().getAbsolutePath(), result.getWebappRoot().getAbsolutePath());
+			String relativePath = StringUtils.substringAfter(fileResult.getJspPage().getFile().getAbsolutePath(), result.getWebappRoot().getAbsolutePath());
 			for (Taglib taglibImport : result.getTaglibImports()) {
 				if (fileResult.getUnusedTaglibImports().contains(taglibImport)) {
 					String line = String.format(

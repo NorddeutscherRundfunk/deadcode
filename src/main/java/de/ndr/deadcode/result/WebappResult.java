@@ -16,7 +16,7 @@ public class WebappResult {
 	private File webappRoot;
 	private List<FileResult> fileResults;
 	private Set<Tag> usedTags = new LinkedHashSet<Tag>();
-	private Set<Taglib> tagImports = new LinkedHashSet<Taglib>();
+	private Set<Taglib> taglibImports = new LinkedHashSet<Taglib>();
 	private Set<Import> imports = new LinkedHashSet<Import>();
 	private Set<JspPage> highCommentRatioPages = new LinkedHashSet<JspPage>();
 	
@@ -38,11 +38,11 @@ public class WebappResult {
 	}
 	
 	public Set<Taglib> getTaglibImports() {
-		return tagImports;
+		return taglibImports;
 	}
 	
 	public void addTaglibImports(Set<Taglib> taglibImports) {
-		tagImports.addAll(taglibImports);
+		this.taglibImports.addAll(taglibImports);
 	}
 
 	public Set<Tag> getUsedTags() {
@@ -58,7 +58,10 @@ public class WebappResult {
 	}
 
 	public void addImports(Set<Import> imports) {
-		imports.addAll(imports);
+		this.imports.addAll(imports);
 	}
 
+	public void addUsedTags(Set<Tag> usedTags) {
+		this.usedTags.addAll(usedTags);
+	}
 }

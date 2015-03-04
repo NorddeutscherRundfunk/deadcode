@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
+import de.ndr.deadcode.result.FileResult;
 import de.ndr.deadcode.result.WebappResult;
 import de.ndr.deadcode.taglib.Tag;
+import de.ndr.deadcode.taglib.Taglib;
 import de.ndr.deadcode.utils.GraphvizWriter;
 
 public class Deadcode {
@@ -33,10 +36,25 @@ public class Deadcode {
 	}
 	
 	private void run(File webappRoot, File graphvizFile) {
-		WebappProcessor processor = new WebappProcessor(COMMENT_RATIO);
-		WebappResult result = processor.processWebapp(webappRoot);
+		WebappProcessor processor = new WebappProcessor(COMMENT_RATIO, webappRoot);
+		WebappResult result = processor.process();
 		
 		GraphvizWriter.write(result, graphvizFile);
+		
+		System.out.println("Unused Taglib imports:");
+		for (FileResult fileResult : result.getFileResults()) {
+			Set<Taglib> unusedTaglibImports = fileResult.getUnusedTaglibImports();
+			if (!unusedTaglibImports.isEmpty()) {
+				Set<String> prefixes = unusedTaglibImports.stream()
+						.map((t) -> t.getPrefix()).collect(Collectors.toSet());
+
+				System.out.format("%d/%d unused imports (%s): %s\n",
+						unusedTaglibImports.size(), fileResult.getJspPage().getImportedTaglibs().size(),
+						StringUtils.join(prefixes, ", "), StringUtils
+								.substringAfter(fileResult.getJspPage().getFile().getAbsolutePath(),
+										webappRoot.getAbsolutePath()));
+			}
+		}
 		
 		Webapp webapp = new Webapp(webappRoot);
 		Set<Tag> definedTags = webapp.getTags();

@@ -30,8 +30,8 @@ public class GraphvizWriterTest {
 	
 	@Test
 	public void testWrite() throws IOException, URISyntaxException {
-		WebappProcessor processor = new WebappProcessor(50);
-		WebappResult result = processor.processWebapp(new File(Test.class.getResource("/webapp").toURI()));
+		WebappProcessor processor = new WebappProcessor(50, new File(Test.class.getResource("/webapp").toURI()));
+		WebappResult result = processor.process();
 		
 		GraphvizWriter.write(result, graphvizFile);
 		
