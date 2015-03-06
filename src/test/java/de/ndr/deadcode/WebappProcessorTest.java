@@ -34,8 +34,8 @@ public class WebappProcessorTest {
 		unusedTaglibImportsMap.put("test4.tag", 0);
 		unusedTaglibImportsMap.put("test5.tag", 0);
 		unusedTaglibImportsMap.put("getBar.tag", 0);
-		unusedTaglibImportsMap.put("test.jsp", 3);
-		unusedTaglibImportsMap.put("test2.jsp", 1);
+		unusedTaglibImportsMap.put("test.jsp", 2);
+		unusedTaglibImportsMap.put("test2.jsp", 2);
 		
 		List<FileResult> fileResults = result.getFileResults();
 		for (FileResult fileResult : fileResults) {
