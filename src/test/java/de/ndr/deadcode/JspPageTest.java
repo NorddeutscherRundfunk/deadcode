@@ -79,7 +79,7 @@ public class JspPageTest {
 	@Test
 	public void handleCommentedCode() {
 		Set<Taglib> taglibImports = jspPage2.getImportedTaglibs();
-		Assert.assertThat(taglibImports.size(), is(1));
+		Assert.assertThat(taglibImports.size(), is(2));
 	}
 	
 	@Test
@@ -87,7 +87,7 @@ public class JspPageTest {
 		CommentedCodeInfo commentedCodeInfo = jspPage2.getCommentedCodeInfo();
 		Assert.assertThat(commentedCodeInfo.commentChars, is(238));
 		Assert.assertThat(commentedCodeInfo.commentCount, is(3));
-		Assert.assertThat(commentedCodeInfo.commentRatio, is(40));
+		Assert.assertThat(commentedCodeInfo.commentRatio, is(36));
 	}
 	
 	@Test
