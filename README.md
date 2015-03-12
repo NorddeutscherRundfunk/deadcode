@@ -12,15 +12,18 @@ example: deadcode /home/foo/workspace/project/src/main/webapp /tmp/deadcode.dot
 
 ## sample output
 ```
-1/1 unused imports (ex): /test2.jsp
-3/7 unused imports (gsa-ext, rx, fn): /test.jsp
+Unused Taglib imports:
+2/2 unused imports (ex, fn): /test2.jsp
+2/7 unused imports (gsa-ext, rx): /test.jsp
 
 Unused tags:
-/WEB-INF/tags/foo: getBar
-1/5 Tags unused.
+/WEB-INF/tags/test: test4
+/WEB-INF/tags/test: test5
+2/3 Tags unused.
 
 HighCommentRatioPages (> 30%):
-/test.jsp: 37
+/test2.jsp: 36
+/test.jsp: 36
 ```
 
 ## Graphviz output
