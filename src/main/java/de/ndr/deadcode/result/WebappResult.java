@@ -9,7 +9,6 @@ import java.util.Set;
 import de.ndr.deadcode.JspPage;
 import de.ndr.deadcode.imports.Import;
 import de.ndr.deadcode.taglib.AbstractJSTLEntity;
-import de.ndr.deadcode.taglib.Tag;
 import de.ndr.deadcode.taglib.Taglib;
 
 public class WebappResult {
