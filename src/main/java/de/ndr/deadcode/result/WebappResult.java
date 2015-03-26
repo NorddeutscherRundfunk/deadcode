@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import de.ndr.deadcode.JspPage;
 import de.ndr.deadcode.imports.Import;
@@ -16,7 +17,7 @@ public class WebappResult {
 	private File webappRoot;
 	private List<FileResult> fileResults;
 	private Set<AbstractJSTLEntity> usedEntities = new LinkedHashSet<AbstractJSTLEntity>();
-	private Set<Taglib> taglibImports = new LinkedHashSet<Taglib>();
+	private Set<Taglib> taglibImports = new TreeSet<Taglib>();
 	private Set<Import> imports = new LinkedHashSet<Import>();
 	private Set<JspPage> highCommentRatioPages = new LinkedHashSet<JspPage>();
 	

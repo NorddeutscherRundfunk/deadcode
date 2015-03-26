@@ -4,21 +4,21 @@ digraph {
 	subgraph cluster_taglibs {
 		label = "taglibs"
 		
-		"http://www.example.com/example/jsp"
 		"http://java.sun.com/jsp/jstl/core"
-		"/WEB-INF/tags/gsa"
+		"http://www.example.com/example/jsp"
 		"http://java.sun.com/jsp/jstl/functions"
+		"/WEB-INF/tags/foo"
+		"/WEB-INF/tags/gsa"
 		"http://jakarta.apache.org/taglibs/regexp-1.0"
 		"/WEB-INF/tags/test"
-		"/WEB-INF/tags/foo"
 	}
 	
 	subgraph cluster_webapp {
 		label = "/"
 		
-		"/test2.jsp" -> "http://www.example.com/example/jsp" [color=red, label=<<FONT COLOR="red">ex</FONT>>]
 		"/test.jsp" -> "/WEB-INF/tags/gsa" [color=red, label=<<FONT COLOR="red">gsa-ext</FONT>>]
-		"/test.jsp" -> "http://java.sun.com/jsp/jstl/functions" [color=red, label=<<FONT COLOR="red">fn</FONT>>]
 		"/test.jsp" -> "http://jakarta.apache.org/taglibs/regexp-1.0" [color=red, label=<<FONT COLOR="red">rx</FONT>>]
+		"/test2.jsp" -> "http://www.example.com/example/jsp" [color=red, label=<<FONT COLOR="red">ex</FONT>>]
+		"/test2.jsp" -> "http://java.sun.com/jsp/jstl/functions" [color=red, label=<<FONT COLOR="red">fn</FONT>>]
 	}
 }
