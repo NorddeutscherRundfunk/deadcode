@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/NorddeutscherRundfunk/deadcode.svg?branch=master)](https://travis-ci.org/NorddeutscherRundfunk/deadcode)
 # deadcode
 Tool to find useless imports in JSP-files and unused tags in a Java web-application
 
