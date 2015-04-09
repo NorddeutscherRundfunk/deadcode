@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 
 import de.ndr.deadcode.imports.Import;
 import de.ndr.deadcode.result.CommentedCodeInfo;
@@ -115,7 +114,7 @@ public class JspPage {
 	}
 
 	private void findCommentedCode(String fileContent) {
-		if (!StringUtils.isEmpty(fileContent)) {
+		if (!fileContent.isEmpty()) {
 			Matcher matcher = COMMENT_PATTERN.matcher(fileContent);
 			while (matcher.find()) {
 				commentedCodeInfo.commentChars += matcher.toMatchResult().end() - matcher.toMatchResult().start();
