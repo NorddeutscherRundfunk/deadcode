@@ -12,7 +12,6 @@ import org.apache.commons.io.FileUtils;
 import de.ndr.deadcode.imports.Import;
 import de.ndr.deadcode.result.CommentedCodeInfo;
 import de.ndr.deadcode.taglib.AbstractJSTLEntity;
-import de.ndr.deadcode.taglib.Function;
 import de.ndr.deadcode.taglib.Tag;
 import de.ndr.deadcode.taglib.TagdirTaglibEntry;
 import de.ndr.deadcode.taglib.Taglib;
@@ -97,17 +96,9 @@ public class JspPage {
 				String tagname = matcher.group("tagname");
 				String function = matcher.group("function");
 				if (tagname != null) {
-					if (taglib instanceof TagdirTaglibEntry) {
-						usedEntities.add(new Tag(((TagdirTaglibEntry) taglib).getTagdir(), tagname));
-					} else if (taglib instanceof UriTaglibEntry) {
-						usedEntities.add(new Tag(((UriTaglibEntry) taglib).getUri(), tagname));
-					}
+					usedEntities.add(new Tag(taglib.getTarget(), tagname));
 				} else if (function != null) {
-					if (taglib instanceof TagdirTaglibEntry) {
-						usedEntities.add(new Function(((TagdirTaglibEntry) taglib).getTagdir(), function));
-					} else if (taglib instanceof UriTaglibEntry) {
-						usedEntities.add(new Function(((UriTaglibEntry) taglib).getUri(), function));
-					}
+					usedEntities.add(new Tag(taglib.getTarget(), function));
 				}
 			}
 		}

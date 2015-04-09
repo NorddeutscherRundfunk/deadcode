@@ -4,13 +4,14 @@ import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-
 public abstract class Taglib implements Comparable<Taglib> {
 	
-	protected String prefix;
+	private String prefix;
+	private String target;
 
-	public Taglib(String prefix) {
+	public Taglib(String prefix, String target) {
 		this.prefix = prefix;
+		this.target = target;
 	}
 
 	@Override
@@ -32,5 +33,12 @@ public abstract class Taglib implements Comparable<Taglib> {
 		return new CompareToBuilder().append(this.prefix, o.prefix).toComparison();
 	}
 	
-	public abstract String getTarget();
+	public String getTarget() {
+		return target;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s: %s", prefix, target);
+	}
 }
