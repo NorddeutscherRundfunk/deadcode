@@ -16,7 +16,7 @@ public abstract class AbstractJSTLEntity implements Comparable<AbstractJSTLEntit
 
 	@Override
 	public String toString() {
-		return new StringBuilder().append(tagdir).append(": ").append(name).toString();
+		return String.format("%s: %s", tagdir, name);
 	}
 
 	public String getName() {
