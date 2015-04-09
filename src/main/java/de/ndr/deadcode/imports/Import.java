@@ -30,5 +30,4 @@ public class Import implements Comparable<Import> {
 	public int compareTo(Import o) {
 		return new CompareToBuilder().append(target, o.target).toComparison();
 	}
-
 }

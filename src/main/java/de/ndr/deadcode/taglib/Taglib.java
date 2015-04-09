@@ -6,6 +6,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 
 public abstract class Taglib implements Comparable<Taglib> {
+	
 	protected String prefix;
 
 	public Taglib(String prefix) {

@@ -10,6 +10,7 @@ import de.ndr.deadcode.imports.Import;
 import de.ndr.deadcode.taglib.Taglib;
 
 public class FileResult {
+	
 	private JspPage jspPage;
 	private Set<Taglib> unusedTaglibImports;
 	private Set<Import> imports;

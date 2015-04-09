@@ -17,6 +17,7 @@ import de.ndr.deadcode.taglib.Taglib;
 import de.ndr.deadcode.utils.GraphvizWriter;
 
 public class Deadcode {
+	
 	private static final int COMMENT_RATIO = 30;
 
 	public static void main(String[] args) throws IOException {
