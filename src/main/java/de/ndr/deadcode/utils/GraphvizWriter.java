@@ -19,7 +19,7 @@ public class GraphvizWriter {
 			return;
 		}
 		
-		List<String> lines = new LinkedList<String>();
+		List<String> lines = new LinkedList<>();
 		lines.add("digraph {");
 		lines.add("\trankdir=LR;");
 		lines.add("\t");

@@ -12,7 +12,7 @@ public class TagTest {
 	
 	@Test
 	public void testCompare() {
-		TreeSet<Tag> tags = new TreeSet<Tag>();
+		TreeSet<Tag> tags = new TreeSet<>();
 		
 		tags.add(new Tag("/WEB-INF/tags/epg", "getImage"));
 		tags.add(new Tag("/WEB-INF/tags/gsa", "dynamicNavigation"));

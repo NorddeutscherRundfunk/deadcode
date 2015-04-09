@@ -15,15 +15,14 @@ import de.ndr.deadcode.taglib.Taglib;
 public class WebappResult {
 
 	private File webappRoot;
-	private List<FileResult> fileResults;
-	private Set<AbstractJSTLEntity> usedEntities = new LinkedHashSet<AbstractJSTLEntity>();
-	private Set<Taglib> taglibImports = new TreeSet<Taglib>();
-	private Set<Import> imports = new LinkedHashSet<Import>();
-	private Set<JspPage> highCommentRatioPages = new LinkedHashSet<JspPage>();
+	private List<FileResult> fileResults = new ArrayList<>();
+	private Set<AbstractJSTLEntity> usedEntities = new LinkedHashSet<>();
+	private Set<Taglib> taglibImports = new TreeSet<>();
+	private Set<Import> imports = new LinkedHashSet<>();
+	private Set<JspPage> highCommentRatioPages = new LinkedHashSet<>();
 	
 	public WebappResult(File webappRoot) {
 		this.webappRoot = webappRoot;
-		this.fileResults = new ArrayList<FileResult>();
 	}
 
 	public File getWebappRoot() {

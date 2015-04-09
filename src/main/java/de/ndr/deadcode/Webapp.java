@@ -20,8 +20,8 @@ import de.ndr.deadcode.taglib.Tag;
 
 public class Webapp {
 
-	private SortedSet<Tag> tags = new TreeSet<Tag>();
-	private Map<String, Set<File>> duplicateFileMap = new HashMap<String, Set<File>>();
+	private SortedSet<Tag> tags = new TreeSet<>();
+	private Map<String, Set<File>> duplicateFileMap = new HashMap<>();
 	private String base = "/WEB-INF/tags";
 
 	public Webapp(File path) {

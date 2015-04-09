@@ -20,10 +20,10 @@ import de.ndr.deadcode.taglib.UriTaglibEntry;
 public class JspPage {
 	
 	private File file;
-	private Set<AbstractJSTLEntity> usedEntities = new HashSet<AbstractJSTLEntity>();
-	private Set<Taglib> importedTaglibs = new HashSet<Taglib>();
-	private Set<Taglib> unusedTaglib = new HashSet<Taglib>();
-	private Set<Import> imports = new HashSet<Import>();
+	private Set<AbstractJSTLEntity> usedEntities = new HashSet<>();
+	private Set<Taglib> importedTaglibs = new HashSet<>();
+	private Set<Taglib> unusedTaglib = new HashSet<>();
+	private Set<Import> imports = new HashSet<>();
 	private CommentedCodeInfo commentedCodeInfo = new CommentedCodeInfo();
 	
 	private static final Pattern COMMENT_PATTERN;
