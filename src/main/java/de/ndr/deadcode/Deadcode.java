@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
 import de.ndr.deadcode.result.FileResult;
@@ -47,21 +47,20 @@ public class Deadcode {
 			Set<Taglib> unusedTaglibImports = fileResult.getUnusedTaglibImports();
 			if (!unusedTaglibImports.isEmpty()) {
 				Set<String> prefixes = unusedTaglibImports.stream()
-						.map((t) -> t.getPrefix()).collect(Collectors.toSet());
+						.map((t) -> t.getPrefix())
+						.collect(Collectors.toSet());
 
 				System.out.format("%d/%d unused imports (%s): %s\n",
 						unusedTaglibImports.size(), fileResult.getJspPage().getImportedTaglibs().size(),
-						StringUtils.join(prefixes, ", "), StringUtils
-								.substringAfter(fileResult.getJspPage().getFile().getAbsolutePath(),
-										webappRoot.getAbsolutePath()));
+						String.join(", ", prefixes), 
+						StringUtils.substringAfter(fileResult.getJspPage().getFile().getAbsolutePath(), webappRoot.getAbsolutePath()));
 			}
 		}
 		
 		Webapp webapp = new Webapp(webappRoot);
 		Set<Tag> definedTags = webapp.getTags();
 		
-		@SuppressWarnings("unchecked")
-		Collection<Tag> unusedTags = CollectionUtils.subtract(definedTags, result.getUsedEntities());
+		Collection<AbstractJSTLEntity> unusedTags = CollectionUtils.subtract(definedTags, result.getUsedEntities());
 		
 		System.out.println("\nUnused tags:");
 		for (AbstractJSTLEntity tag : unusedTags) {
@@ -76,5 +75,13 @@ public class Deadcode {
 								StringUtils.substringAfter(page.getFile().getAbsolutePath(), webappRoot.getAbsolutePath()),
 								page.getCommentedCodeInfo().commentRatio);
 		}
+		
+		System.out.println("\nDuplicateFiles:");
+		webapp.getDuplicateFiles().values().forEach(v -> {
+			Set<String> files = v.stream()
+					.map((f) -> StringUtils.substringAfter(f.getAbsolutePath(), webappRoot.getAbsolutePath()))
+					.collect(Collectors.toSet());
+			System.out.format("%d: %s\n", files.size(),	String.join(", ", files));
+		});
 	}
 }

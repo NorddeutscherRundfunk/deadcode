@@ -5,9 +5,10 @@ import static org.hamcrest.CoreMatchers.is;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,12 +40,24 @@ public class WebappTest {
 		JspPage jspPage = new JspPage(new File(Test.class.getResource("/webapp/test.jsp").getFile()));
 		Set<AbstractJSTLEntity> usedEntities = jspPage.getUsedEntities();
 		Set<Tag> definedTags = webapp.getTags();
-		@SuppressWarnings("unchecked")
-		Collection<Tag> unusedTags = CollectionUtils.subtract(definedTags, usedEntities);
+		Collection<AbstractJSTLEntity> unusedTags = CollectionUtils.subtract(definedTags, usedEntities);
 		
 		Assert.assertThat(unusedTags.size(), is(2));
 		
 		Assert.assertTrue(unusedTags.contains(new Tag("/WEB-INF/tags/test", "test4")));
 		Assert.assertTrue(unusedTags.contains(new Tag("/WEB-INF/tags/test", "test5")));
+	}
+	
+	@Test
+	public void findDuplicateFiles() {
+		Map<String, Set<File>> duplicateFiles = webapp.getDuplicateFiles();
+		Assert.assertTrue(duplicateFiles.containsKey("da39a3ee5e6b4b0d3255bfef95601890afd80709"));
+		Assert.assertThat(duplicateFiles.size(), is(1));
+		
+		Set<File> files = duplicateFiles.get("da39a3ee5e6b4b0d3255bfef95601890afd80709");
+		Assert.assertThat(files.size(), is(3));
+		Assert.assertTrue(files.contains(new File(Test.class.getResource("/webapp/WEB-INF/tags/test/test4.tag").getFile())));
+		Assert.assertTrue(files.contains(new File(Test.class.getResource("/webapp/WEB-INF/tags/test/test5.tag").getFile())));
+		Assert.assertTrue(files.contains(new File(Test.class.getResource("/webapp/WEB-INF/tags/foo/getBar.tag").getFile())));
 	}
 }
