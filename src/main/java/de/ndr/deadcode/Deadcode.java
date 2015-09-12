@@ -48,7 +48,7 @@ public class Deadcode {
 			Set<Taglib> unusedTaglibImports = fileResult.getUnusedTaglibImports();
 			if (!unusedTaglibImports.isEmpty()) {
 				Set<String> prefixes = unusedTaglibImports.stream()
-						.map((t) -> t.getPrefix())
+						.map(Taglib::getPrefix)
 						.collect(Collectors.toSet());
 
 				System.out.format("%d/%d unused imports (%s): %s\n",

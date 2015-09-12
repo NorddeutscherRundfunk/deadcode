@@ -14,7 +14,7 @@ public class Import implements Comparable<Import> {
 
 	@Override
 	public String toString() {
-		return new StringBuilder().append(target).toString();
+		return target;
 	}
 	
 	@Override

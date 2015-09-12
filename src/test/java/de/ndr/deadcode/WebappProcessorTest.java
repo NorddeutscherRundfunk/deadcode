@@ -30,7 +30,7 @@ public class WebappProcessorTest {
 	
 	@Test
 	public void unusedImports() {
-		Map<String, Integer> unusedTaglibImportsMap = new HashMap<String, Integer>();
+		Map<String, Integer> unusedTaglibImportsMap = new HashMap<>();
 		unusedTaglibImportsMap.put("test4.tag", 0);
 		unusedTaglibImportsMap.put("test5.tag", 0);
 		unusedTaglibImportsMap.put("getBar.tag", 0);

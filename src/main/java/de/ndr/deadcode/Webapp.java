@@ -38,7 +38,7 @@ public class Webapp {
 		for (File file : allFiles) {
 			try {
 				String sha1Hex = DigestUtils.sha1Hex(FileUtils.readFileToByteArray(file));
-				duplicateFileMap.computeIfAbsent(sha1Hex, v -> new HashSet<File>()).add(file);
+				duplicateFileMap.computeIfAbsent(sha1Hex, v -> new HashSet<>()).add(file);
 			} catch (IOException e) {
 				System.err.format("Could not hash file '%s': %s\n", file, e.getMessage());
 			}

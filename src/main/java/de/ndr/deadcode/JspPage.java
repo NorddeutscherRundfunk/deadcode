@@ -7,12 +7,12 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import de.ndr.deadcode.taglib.Function;
 import org.apache.commons.io.FileUtils;
 
 import de.ndr.deadcode.imports.Import;
 import de.ndr.deadcode.result.CommentedCodeInfo;
 import de.ndr.deadcode.taglib.AbstractJSTLEntity;
+import de.ndr.deadcode.taglib.Function;
 import de.ndr.deadcode.taglib.Tag;
 import de.ndr.deadcode.taglib.TagdirTaglibEntry;
 import de.ndr.deadcode.taglib.Taglib;
@@ -84,7 +84,7 @@ public class JspPage {
 			}
 		}
 		
-		unusedTaglib = new HashSet<Taglib>(importedTaglibs);
+		unusedTaglib = new HashSet<>(importedTaglibs);
 		// Find usedTags in fileContent
 		for (Taglib taglib : importedTaglibs) {
 			Pattern pattern = Pattern.compile(
