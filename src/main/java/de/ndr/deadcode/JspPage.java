@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.ndr.deadcode.taglib.Function;
 import org.apache.commons.io.FileUtils;
 
 import de.ndr.deadcode.imports.Import;
@@ -98,7 +99,7 @@ public class JspPage {
 				if (tagname != null) {
 					usedEntities.add(new Tag(taglib.getTarget(), tagname));
 				} else if (function != null) {
-					usedEntities.add(new Tag(taglib.getTarget(), function));
+					usedEntities.add(new Function(taglib.getTarget(), function));
 				}
 			}
 		}
