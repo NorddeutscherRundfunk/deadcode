@@ -64,9 +64,7 @@ public class Deadcode {
 		Collection<AbstractJSTLEntity> unusedTags = CollectionUtils.subtract(definedTags, result.getUsedEntities());
 		
 		System.out.println("\nUnused tags:");
-		for (AbstractJSTLEntity tag : unusedTags) {
-			System.out.println(tag);
-		}
+		unusedTags.forEach(System.out::println);
 		System.out.println(unusedTags.size() + "/" + definedTags.size() + " Tags unused.");
 		
 		
