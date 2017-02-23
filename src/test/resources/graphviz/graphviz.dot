@@ -16,9 +16,9 @@ digraph {
 	subgraph cluster_webapp {
 		label = "/"
 		
-		"/test.jsp" -> "/WEB-INF/tags/gsa" [color=red, label=<<FONT COLOR="red">gsa-ext</FONT>>]
-		"/test.jsp" -> "http://jakarta.apache.org/taglibs/regexp-1.0" [color=red, label=<<FONT COLOR="red">rx</FONT>>]
 		"/test2.jsp" -> "http://www.example.com/example/jsp" [color=red, label=<<FONT COLOR="red">ex</FONT>>]
 		"/test2.jsp" -> "http://java.sun.com/jsp/jstl/functions" [color=red, label=<<FONT COLOR="red">fn</FONT>>]
+		"/test.jsp" -> "/WEB-INF/tags/gsa" [color=red, label=<<FONT COLOR="red">gsa-ext</FONT>>]
+		"/test.jsp" -> "http://jakarta.apache.org/taglibs/regexp-1.0" [color=red, label=<<FONT COLOR="red">rx</FONT>>]
 	}
 }

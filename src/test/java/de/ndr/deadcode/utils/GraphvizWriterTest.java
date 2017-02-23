@@ -1,18 +1,16 @@
 package de.ndr.deadcode.utils;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
+import de.ndr.deadcode.WebappProcessor;
+import de.ndr.deadcode.result.WebappResult;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.ndr.deadcode.WebappProcessor;
-import de.ndr.deadcode.result.WebappResult;
-import de.ndr.deadcode.utils.GraphvizWriter;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class GraphvizWriterTest {
 
